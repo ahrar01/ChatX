@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "620981922693",
+    "firebase_url": "https://mychat-8cabe.firebaseio.com",
+    "project_id": "mychat-8cabe",
+    "storage_bucket": "mychat-8cabe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620981922693:android:0644b46b5b0ae308",
+        "android_client_info": {
+          "package_name": "com.appswedevelop.mychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620981922693-em9dd2r4vphc54kahv0sh0dngeqdek18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appswedevelop.mychat",
+            "certificate_hash": "130734da661e4215ac0aafd7600025ad0a130177"
+          }
+        },
+        {
+          "client_id": "620981922693-ierjq2r08paqjtglnjfjhmhok3ev2rtf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWs4nmAzXzIn3sQNvgANU1aBmf0Pazzzg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620981922693-ierjq2r08paqjtglnjfjhmhok3ev2rtf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
