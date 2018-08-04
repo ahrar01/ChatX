@@ -94,7 +94,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 if(!image.equals("default")) {
 
-                Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
+                    //Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
 
                     Picasso.get().load(image).networkPolicy(NetworkPolicy.OFFLINE)
                             .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
