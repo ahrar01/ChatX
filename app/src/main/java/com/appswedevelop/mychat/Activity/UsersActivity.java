@@ -99,9 +99,9 @@ public class UsersActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                       // Intent profileIntent = new Intent(UsersActivity.this, ProfileActivity.class);
-                        //profileIntent.putExtra("user_id", user_id);
-                       // startActivity(profileIntent);
+                        Intent profileIntent = new Intent(UsersActivity.this, ProfileActivity.class);
+                        profileIntent.putExtra("user_id", user_id);
+                        startActivity(profileIntent);
 
                     }
                 });

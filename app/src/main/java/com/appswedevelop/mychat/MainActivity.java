@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(" ChatApp");
+        getSupportActionBar().setTitle(" ChatX");
 
         //Tabs
         mViewPager = findViewById(R.id.main_tabPager);
