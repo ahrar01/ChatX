@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-                    String uid = current_user.getUid();
+                    String uid = Objects.requireNonNull(current_user).getUid();
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
@@ -135,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
 
                     mRegProgress.hide();
-                    String error = "";
+                    String error;
                     try {
                         throw Objects.requireNonNull(task.getException());
                     } catch (FirebaseAuthWeakPasswordException e) {
