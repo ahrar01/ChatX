@@ -1,4 +1,4 @@
-package com.appswedevelop.mychat;
+package com.appswedevelop.mychat.Models;
 
 public class Users {
     public String name;

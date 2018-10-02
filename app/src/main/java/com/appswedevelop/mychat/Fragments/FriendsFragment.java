@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appswedevelop.mychat.Activity.ChatActivity;
 import com.appswedevelop.mychat.Activity.ProfileActivity;
 import com.appswedevelop.mychat.Models.Friends;
 import com.appswedevelop.mychat.R;
@@ -101,9 +102,7 @@ public class FriendsFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull final FriendsViewHolder friendsViewHolder, int i, @NonNull Friends friends) {
-
-                friendsViewHolder.setDate(friends.getDate());
+            protected void onBindViewHolder(@NonNull final FriendsViewHolder friendsViewHolder, int i, @NonNull final Friends friends) {
 
                 final String list_user_id = getRef(i).getKey();
 
@@ -123,6 +122,8 @@ public class FriendsFragment extends Fragment {
 
                         friendsViewHolder.setName(userName);
                         friendsViewHolder.setUserImage(userThumb, getContext());
+                        friendsViewHolder.setDate(friends.getDate());
+
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -148,11 +149,11 @@ public class FriendsFragment extends Fragment {
 
                                         if (i == 1) {
 
-                                          /*  Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                            Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                             chatIntent.putExtra("user_id", list_user_id);
                                             chatIntent.putExtra("user_name", userName);
                                             startActivity(chatIntent);
-                                            */
+
                                         }
 
                                     }
