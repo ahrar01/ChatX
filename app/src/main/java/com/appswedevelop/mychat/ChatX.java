@@ -2,6 +2,7 @@ package com.appswedevelop.mychat;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,6 +13,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import io.fabric.sdk.android.Fabric;
+
 public class ChatX extends Application {
 
     private DatabaseReference mUserDatabase;
@@ -20,6 +23,7 @@ public class ChatX extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 

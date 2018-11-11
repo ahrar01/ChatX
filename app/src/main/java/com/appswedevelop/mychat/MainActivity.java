@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
 
-            Toast.makeText(this, "LoG Out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
         }
 
         if (item.getItemId() == R.id.main_settings_btn) {

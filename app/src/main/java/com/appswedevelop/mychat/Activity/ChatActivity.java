@@ -1,6 +1,9 @@
 package com.appswedevelop.mychat.Activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +23,8 @@ import com.appswedevelop.mychat.MessageAdapter;
 import com.appswedevelop.mychat.Models.GetTimeAgo;
 import com.appswedevelop.mychat.Models.Messages;
 import com.appswedevelop.mychat.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +36,7 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +47,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final int TOTAL_ITEMS_TO_LOAD = 20;
+    private static final int TOTAL_ITEMS_TO_LOAD = 15;
     private static final int GALLERY_PICK = 1;
     private final List<Messages> messagesList = new ArrayList<>();
     private String mChatUser;
@@ -238,7 +244,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-/*
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -301,7 +307,7 @@ public class ChatActivity extends AppCompatActivity {
 
         }
 
-    } */
+    }
 
     private void loadMoreMessages() {
 
