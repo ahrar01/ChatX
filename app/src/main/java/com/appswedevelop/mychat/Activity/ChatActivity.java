@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appswedevelop.mychat.MessageAdapter;
 import com.appswedevelop.mychat.Models.GetTimeAgo;
@@ -452,8 +453,9 @@ public class ChatActivity extends AppCompatActivity {
 
         String message = mChatMessageView.getText().toString();
 
-        if (!TextUtils.isEmpty(message)) {
-
+        if (TextUtils.isEmpty(message)) {
+            Toast.makeText(ChatActivity.this, "Please write your message.", Toast.LENGTH_LONG).show();
+        } else {
             String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;
             String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;
 
@@ -491,9 +493,9 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
 
+
                 }
             });
-
         }
 
     }

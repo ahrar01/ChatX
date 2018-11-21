@@ -89,11 +89,6 @@ public class ChatsFragment extends Fragment {
         super.onStart();
 
         Query conversationQuery = mConvDatabase.orderByChild("timestamp");
-
-       /* Query query = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("Chats")
-                .limitToLast(50); */
         FirebaseRecyclerOptions<Conv> options =
                 new FirebaseRecyclerOptions.Builder<Conv>()
                         .setQuery(conversationQuery, Conv.class)
