@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -84,13 +86,9 @@ public class FriendsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        Query query = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("Friends")
-                .limitToLast(50);
         FirebaseRecyclerOptions<Friends> options =
                 new FirebaseRecyclerOptions.Builder<Friends>()
-                        .setQuery(query, Friends.class)
+                        .setQuery(mFriendsDatabase, Friends.class)
                         .build();
         FirebaseRecyclerAdapter<Friends, FriendsViewHolder> friendsRecyclerViewAdapter = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(options) {
             @NonNull
@@ -129,7 +127,7 @@ public class FriendsFragment extends Fragment {
                             @Override
                             public void onClick(View view) {
 
-                                CharSequence options[] = new CharSequence[]{"Open Profile", "Send message"};
+                                CharSequence options[] = new CharSequence[]{userName + "'s Profile", "Send message"};
 
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
@@ -197,7 +195,7 @@ public class FriendsFragment extends Fragment {
         public void setDate(String date) {
 
             TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
-            userStatusView.setText(date);
+            userStatusView.setText("Friends since: \n" + date);
 
         }
 
@@ -208,11 +206,21 @@ public class FriendsFragment extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx) {
+        public void setUserImage(final String thumb_image, final Context ctx) {
 
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            final CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+            Picasso.get().load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_avatar).into(userImageView, new Callback() {
+                @Override
+                public void onSuccess() {
 
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+
+                }
+            });
         }
 
         public void setUserOnline(String online_status) {
