@@ -32,7 +32,8 @@
             android:parentActivityName=".Activity.StartActivity" />
         <activity
             android:name=".Activity.LoginActivity"
-            android:parentActivityName=".Activity.StartActivity" />
+            android:parentActivityName=".Activity.StartActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.SettingsActivity"
             android:parentActivityName=".MainActivity" />
