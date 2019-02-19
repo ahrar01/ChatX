@@ -33,7 +33,9 @@
         <activity
             android:name=".Activity.LoginActivity"
             android:parentActivityName=".Activity.StartActivity" />
-        <activity android:name=".Activity.SettingsActivity" />
+        <activity
+            android:name=".Activity.SettingsActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Activity.StatusActivity"
             android:parentActivityName=".Activity.SettingsActivity" />

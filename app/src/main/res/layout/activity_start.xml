@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context=".Activity.StartActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/anim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView"
+        android:foregroundGravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="mobile.json"
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/textView"
@@ -13,12 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/start_login_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:text="Welcome to  Chat App"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:fontFamily="@font/blacklist"
+        android:padding="5dp"
+        android:text="Welcome to ChatX"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/start_reg_btn"
