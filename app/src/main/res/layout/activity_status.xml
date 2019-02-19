@@ -39,6 +39,6 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/colorAccent"
         android:text="SAVE CHANGES"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
 </RelativeLayout>
