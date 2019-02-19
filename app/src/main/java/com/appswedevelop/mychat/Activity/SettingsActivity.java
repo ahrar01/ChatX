@@ -3,12 +3,16 @@ package com.appswedevelop.mychat.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,23 +57,27 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView mName;
     private TextView mStatus;
     private Button mStatusBtn;
-    private Button mImageBtn;
+    private ImageView mImageBtn;
     // Storage Firebase
     private StorageReference mImageStorage;
 
     private ProgressDialog mProgressDialog;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.blacklist);
+        TextView appname = findViewById(R.id.appname);
+        appname.setTypeface(typeface);
 
         mDisplayImage =  findViewById(R.id.settings_image);
         mName =  findViewById(R.id.settings_name);
         mStatus =  findViewById(R.id.settings_status);
 
         mStatusBtn =  findViewById(R.id.settings_status_btn);
-        mImageBtn =  findViewById(R.id.settings_image_btn);
+        mImageBtn = findViewById(R.id.settings_UploadPic);
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
@@ -151,12 +159,6 @@ public class SettingsActivity extends AppCompatActivity {
 
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
 
-
-                /*
-                CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .start(SettingsActivity.this);
-                        */
 
             }
         });

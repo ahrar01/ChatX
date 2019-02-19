@@ -1,13 +1,16 @@
 package com.appswedevelop.mychat;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appswedevelop.mychat.Activity.SettingsActivity;
@@ -38,10 +41,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
-        mToolbar = findViewById(R.id.main_page_toolbar);
+        mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(" ChatX");
-
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.blacklist);
+        TextView appname = findViewById(R.id.appname);
+        appname.setTypeface(typeface);
         if (mAuth.getCurrentUser() != null) {
 
 
