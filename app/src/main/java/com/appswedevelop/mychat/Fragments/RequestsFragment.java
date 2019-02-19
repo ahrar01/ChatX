@@ -137,54 +137,47 @@ public class RequestsFragment extends Fragment {
                                         viewHolder.setUserName(userName);
                                         viewHolder.setThumb_user_image(thumbImage, getContext());
                                         viewHolder.setUser_Status(userStatus);
+                                        Button req_sent_button = viewHolder.mView.findViewById(R.id.request_accept_btn);
+                                        Button decline_btn = viewHolder.mView.findViewById(R.id.request_decline_btn);
 
-                                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                                        req_sent_button.setOnClickListener(new View.OnClickListener() {
                                             @Override
-                                            public void onClick(View view) {
-                                                CharSequence opcions[] = new CharSequence[]
-                                                        {
-                                                                "Accept Friend Request",
-                                                                "Cancel Friend Request"
-                                                        };
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                                builder.setTitle("Friend Request Options");
+                                            public void onClick(View v) {
+                                                Calendar calFordATE = Calendar.getInstance();
+                                                SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+                                                final String saveCurrentDate = currentDate.format(calFordATE.getTime());
 
-                                                builder.setItems(opcions, new DialogInterface.OnClickListener() {
+                                                FriendsDatabaseRef.child(online_user_id).child(list_users_id).child("date").setValue(saveCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
-                                                    public void onClick(DialogInterface dialogInterface, int position) {
-                                                        if (position == 0) {
-                                                            Calendar calFordATE = Calendar.getInstance();
-                                                            SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
-                                                            final String saveCurrentDate = currentDate.format(calFordATE.getTime());
-
-                                                            FriendsDatabaseRef.child(online_user_id).child(list_users_id).child("date").setValue(saveCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void aVoid) {
-                                                                    FriendsDatabaseRef.child(list_users_id).child(online_user_id).child("date").setValue(saveCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                        @Override
-                                                                        public void onSuccess(Void aVoid) {
-                                                                            FriendsReqDatabaseRef.child(online_user_id).child(list_users_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    public void onSuccess(Void aVoid) {
+                                                        FriendsDatabaseRef.child(list_users_id).child(online_user_id).child("date").setValue(saveCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                FriendsReqDatabaseRef.child(online_user_id).child(list_users_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            FriendsReqDatabaseRef.child(list_users_id).child(online_user_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                 @Override
                                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                                     if (task.isSuccessful()) {
-                                                                                        FriendsReqDatabaseRef.child(list_users_id).child(online_user_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                            @Override
-                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                if (task.isSuccessful()) {
-                                                                                                    Toast.makeText(getContext(), "Friend Request Accepted Successfully!", Toast.LENGTH_SHORT).show();
-                                                                                                }
-                                                                                            }
-                                                                                        });
+                                                                                        Toast.makeText(getContext(), "Friend Request Accepted Successfully!", Toast.LENGTH_SHORT).show();
                                                                                     }
                                                                                 }
                                                                             });
                                                                         }
-                                                                    });
-                                                                }
-                                                            });
-                                                        }
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        decline_btn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
 
-                                                        if (position == 1) {
                                                             FriendsReqDatabaseRef.child(online_user_id).child(list_users_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -201,10 +194,8 @@ public class RequestsFragment extends Fragment {
                                                                 }
                                                             });
                                                         }
-                                                    }
-                                                });
-                                                builder.show();
-                                            }
+
+
                                         });
                                     }
 
