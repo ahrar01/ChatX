@@ -1,13 +1,10 @@
 package com.appswedevelop.mychat.Activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button mLogin_btn;
 
-    private ProgressDialog mLoginProgress;
+    private KProgressHUD mLoginProgress;
 
     private FirebaseAuth mAuth;
 
@@ -43,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_new);
+        setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -51,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Login");
-
-        mLoginProgress = new ProgressDialog(this);
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -69,12 +65,17 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mLoginEmail.getText().toString();
                 String password = mLoginPassword.getText().toString();
 
-                if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
+                if (validateUsername(email) && validatePassword(password)) {
 
-                    mLoginProgress.setTitle("Logging In");
-                    mLoginProgress.setMessage("Please wait while we check your credentials.");
-                    mLoginProgress.setCanceledOnTouchOutside(false);
-                    mLoginProgress.show();
+                    //Progress Bar while connection establishes
+
+                    mLoginProgress = KProgressHUD.create(LoginActivity.this)
+                            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                            .setLabel("Please wait")
+                            .setCancellable(false)
+                            .setAnimationSpeed(2)
+                            .setDimAmount(0.5f)
+                            .show();
 
                     loginUser(email, password);
 
@@ -112,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
 
-                    mLoginProgress.hide();
+                    mLoginProgress.dismiss();
 
                     String task_result = task.getException().getMessage().toString();
 
@@ -125,4 +126,30 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    private boolean validatePassword(String pass) {
+
+
+        if (pass.length() < 4 || pass.length() > 20) {
+            mLoginPassword.setError("Password Must consist of 4 to 20 characters");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateUsername(String email) {
+
+        if (email.length() < 4 || email.length() > 30) {
+            mLoginEmail.setError("Email Must consist of 4 to 30 characters");
+            return false;
+        } else if (!email.matches("^[A-za-z0-9.@]+")) {
+            mLoginEmail.setError("Only . and @ characters allowed");
+            return false;
+        } else if (!email.contains("@") || !email.contains(".")) {
+            mLoginEmail.setError("Email must contain @ and .");
+            return false;
+        }
+        return true;
+    }
+
 }
