@@ -216,7 +216,7 @@ public class RequestsFragment extends Fragment {
 
                             } else if (request_type.equals("sent")) {
                                 Button req_sent_btn = viewHolder.mView.findViewById(R.id.request_accept_btn);
-                                req_sent_btn.setText("Req Sent");
+                                req_sent_btn.setText("Request Sent");
 
                                 viewHolder.mView.findViewById(R.id.request_decline_btn).setVisibility(View.INVISIBLE);
 
@@ -234,14 +234,14 @@ public class RequestsFragment extends Fragment {
                                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                CharSequence opcions[] = new CharSequence[]
+                                                CharSequence options[] = new CharSequence[]
                                                         {
-                                                                "Cancel Friend Request",
+                                                                "Cancel Sent Request",
                                                         };
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                                 builder.setTitle("Friend Request Sent");
 
-                                                builder.setItems(opcions, new DialogInterface.OnClickListener() {
+                                                builder.setItems(options, new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int position) {
 
