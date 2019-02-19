@@ -55,6 +55,8 @@ dependencies {
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     implementation 'com.airbnb.android:lottie:2.2.5'
     implementation 'com.kaopiz:kprogresshud:1.1.0'
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+
 
     //Stylish edittextbox
     implementation 'com.github.florent37:materialtextfield:1.0.7'
