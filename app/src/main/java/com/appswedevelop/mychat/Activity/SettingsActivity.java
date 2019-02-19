@@ -40,6 +40,8 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
+import static android.app.Activity.RESULT_OK;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private static final int GALLERY_PICK = 1;

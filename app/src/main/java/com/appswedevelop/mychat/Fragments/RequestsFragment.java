@@ -130,9 +130,9 @@ public class RequestsFragment extends Fragment {
                                 UsersReference.child(list_users_id).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        final String userName = dataSnapshot.child("user_name").getValue().toString();
-                                        final String thumbImage = dataSnapshot.child("user_thumb_image").getValue().toString();
-                                        final String userStatus = dataSnapshot.child("user_status").getValue().toString();
+                                        final String userName = dataSnapshot.child("name").getValue().toString();
+                                        final String thumbImage = dataSnapshot.child("thumb_image").getValue().toString();
+                                        final String userStatus = dataSnapshot.child("status").getValue().toString();
 
                                         viewHolder.setUserName(userName);
                                         viewHolder.setThumb_user_image(thumbImage, getContext());
@@ -223,9 +223,9 @@ public class RequestsFragment extends Fragment {
                                 UsersReference.child(list_users_id).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        final String userName = dataSnapshot.child("user_name").getValue().toString();
-                                        final String thumbImage = dataSnapshot.child("user_thumb_image").getValue().toString();
-                                        final String userStatus = dataSnapshot.child("user_status").getValue().toString();
+                                        final String userName = dataSnapshot.child("name").getValue().toString();
+                                        final String thumbImage = dataSnapshot.child("thumb_image").getValue().toString();
+                                        final String userStatus = dataSnapshot.child("status").getValue().toString();
 
                                         viewHolder.setUserName(userName);
                                         viewHolder.setThumb_user_image(thumbImage, getContext());
@@ -291,6 +291,7 @@ public class RequestsFragment extends Fragment {
         };
 
         myRequestsList.setAdapter(firebaseRecyclerAdapter);
+        firebaseRecyclerAdapter.startListening();
 
     }
 
