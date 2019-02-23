@@ -1,4 +1,4 @@
-package com.appswedevelop.mychat;
+package com.appswedevelop.mychat.Adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appswedevelop.mychat.Models.Messages;
+import com.appswedevelop.mychat.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

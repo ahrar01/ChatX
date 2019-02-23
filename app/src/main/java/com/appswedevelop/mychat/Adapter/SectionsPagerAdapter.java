@@ -1,4 +1,4 @@
-package com.appswedevelop.mychat;
+package com.appswedevelop.mychat.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +8,7 @@ import com.appswedevelop.mychat.Fragments.ChatsFragment;
 import com.appswedevelop.mychat.Fragments.FriendsFragment;
 import com.appswedevelop.mychat.Fragments.RequestsFragment;
 
-class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);

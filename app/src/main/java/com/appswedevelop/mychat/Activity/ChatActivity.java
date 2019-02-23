@@ -20,7 +20,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appswedevelop.mychat.MessageAdapter;
+import com.appswedevelop.mychat.Adapter.MessageAdapter;
 import com.appswedevelop.mychat.Models.GetTimeAgo;
 import com.appswedevelop.mychat.Models.Messages;
 import com.appswedevelop.mychat.R;

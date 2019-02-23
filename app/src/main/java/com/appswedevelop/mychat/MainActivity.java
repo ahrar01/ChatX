@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.appswedevelop.mychat.Activity.SettingsActivity;
 import com.appswedevelop.mychat.Activity.StartActivity;
 import com.appswedevelop.mychat.Activity.UsersActivity;
+import com.appswedevelop.mychat.Adapter.SectionsPagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

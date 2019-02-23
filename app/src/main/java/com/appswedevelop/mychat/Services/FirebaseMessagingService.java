@@ -1,10 +1,11 @@
-package com.appswedevelop.mychat;
+package com.appswedevelop.mychat.Services;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
+import com.appswedevelop.mychat.R;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
