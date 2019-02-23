@@ -34,8 +34,10 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -143,14 +145,13 @@ public class RequestsFragment extends Fragment {
                                         req_sent_button.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Calendar calFordATE = Calendar.getInstance();
-                                                SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
-                                                final String saveCurrentDate = currentDate.format(calFordATE.getTime());
+                                                final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
 
-                                                FriendsDatabaseRef.child(online_user_id).child(list_users_id).child("date").setValue(saveCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                                                FriendsDatabaseRef.child(online_user_id).child(list_users_id).child("date").setValue(currentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
-                                                        FriendsDatabaseRef.child(list_users_id).child(online_user_id).child("date").setValue(saveCurrentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        FriendsDatabaseRef.child(list_users_id).child(online_user_id).child("date").setValue(currentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
                                                                 FriendsReqDatabaseRef.child(online_user_id).child(list_users_id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
