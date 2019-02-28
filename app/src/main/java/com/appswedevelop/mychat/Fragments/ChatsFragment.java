@@ -1,17 +1,23 @@
 package com.appswedevelop.mychat.Fragments;
 
 
+import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +36,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -46,6 +54,7 @@ public class ChatsFragment extends Fragment {
     private String mCurrent_user_id;
 
     private View mMainView;
+    Dialog profilePopup;
 
 
     public ChatsFragment() {
@@ -63,6 +72,8 @@ public class ChatsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
+
+        profilePopup = new Dialog(getContext());
 
         mConvDatabase = FirebaseDatabase.getInstance().getReference().child("Chat").child(mCurrent_user_id);
 
@@ -146,7 +157,7 @@ public class ChatsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         final String userName = dataSnapshot.child("name").getValue().toString();
-                        String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
+                        final String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
 
                         if (dataSnapshot.hasChild("online")) {
 
@@ -158,6 +169,28 @@ public class ChatsFragment extends Fragment {
                         convViewHolder.setName(userName);
                         convViewHolder.setUserImage(userThumb, getContext());
 
+                        final CircleImageView userImageView = convViewHolder.itemView.findViewById(R.id.user_single_image);
+                        userImageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                profilePopup.setContentView(R.layout.profile);
+                                ImageButton info = profilePopup.findViewById(R.id.userInfo);
+                                ImageView userPic = profilePopup.findViewById(R.id.userPic);
+                                TextView UserName = profilePopup.findViewById(R.id.userName);
+                                UserName.setText(userName);
+                                Picasso.get().load(userThumb).fit().placeholder(R.drawable.default_avatar).into(userPic);
+
+
+                                info.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    }
+                                });
+                                profilePopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                profilePopup.show();
+
+                            }
+                        });
                         convViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -201,7 +234,7 @@ public class ChatsFragment extends Fragment {
 
         public void setMessage(String message, boolean isSeen) {
 
-            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+            TextView userStatusView = mView.findViewById(R.id.user_single_status);
             userStatusView.setText(message);
 
             if (!isSeen) {
@@ -214,21 +247,21 @@ public class ChatsFragment extends Fragment {
 
         public void setName(String name) {
 
-            TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
+            TextView userNameView = mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);
 
         }
 
         public void setUserImage(String thumb_image, Context ctx) {
 
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+            CircleImageView userImageView = mView.findViewById(R.id.user_single_image);
             Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 
         public void setUserOnline(String online_status) {
 
-            ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);
+            ImageView userOnlineView = mView.findViewById(R.id.user_single_online_icon);
 
             if (online_status.equals("true")) {
 

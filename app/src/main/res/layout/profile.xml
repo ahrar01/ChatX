@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="220dp"
+    android:layout_height="240dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@color/transParent"
+
+    android:elevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transText"
+            android:elevation="5dp"
+            android:padding="5dp"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/userPic"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="UserImage"
+            android:src="@drawable/man"
+            android:transitionName="ViewTrans" />
+
+        <LinearLayout
+            android:id="@+id/LLbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userPic"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageButton
+                android:id="@+id/chat"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/ic_chat_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/userInfo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/ic_info_outline" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

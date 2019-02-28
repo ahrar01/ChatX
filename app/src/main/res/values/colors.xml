@@ -5,6 +5,11 @@
     <color name="colorAccent">#fff</color>
     <color name="darkColor">#222222</color>
 
+
+    <color name="transParent">#00FFFFFF</color>
+    <color name="transText">#4FCABFBF</color>
+
+
     <!-- Material Design - Color Palette -->
 
     <!-- http://www.google.com/design/spec/style/color.html#color-color-palette -->
