@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appswedevelop.mychat.Activity.ChatActivity;
+import com.appswedevelop.mychat.Activity.ProfileActivity;
 import com.appswedevelop.mychat.Models.Conv;
 import com.appswedevelop.mychat.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -175,15 +176,31 @@ public class ChatsFragment extends Fragment {
                             public void onClick(View v) {
                                 profilePopup.setContentView(R.layout.profile);
                                 ImageButton info = profilePopup.findViewById(R.id.userInfo);
+                                ImageButton toChat = profilePopup.findViewById(R.id.chat);
                                 ImageView userPic = profilePopup.findViewById(R.id.userPic);
                                 TextView UserName = profilePopup.findViewById(R.id.userName);
                                 UserName.setText(userName);
                                 Picasso.get().load(userThumb).fit().placeholder(R.drawable.default_avatar).into(userPic);
 
 
+                                toChat.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                        chatIntent.putExtra("user_id", list_user_id);
+                                        chatIntent.putExtra("user_name", userName);
+                                        startActivity(chatIntent);
+                                        profilePopup.dismiss();
+                                    }
+                                });
+
                                 info.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        Intent profileIntent = new Intent(getContext(), ProfileActivity.class);
+                                        profileIntent.putExtra("user_id", list_user_id);
+                                        startActivity(profileIntent);
+                                        profilePopup.dismiss();
                                     }
                                 });
                                 profilePopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
